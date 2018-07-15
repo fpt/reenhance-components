@@ -68,9 +68,6 @@ typings/
 # dotenv environment variables file
 .env
 
-# dotenv environment variables file
-.env
-
 # End of https://www.gitignore.io/api/node
 
 # IDE #
@@ -79,9 +76,4 @@ typings/
 *.iml
 
 dist
-storybook-static
-coverage
-
-lib
-lib-esm
-_bundles
+umd

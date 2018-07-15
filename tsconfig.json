@@ -15,17 +15,13 @@
     "typeRoots" : ["./typings"],
     "types": ["jest"],
     "declaration": true,
-    "outDir": "./lib"
+    "outDir": "./dist"
   },
   "exclude": [
     "node_modules",
-    "build",
-    "scripts",
-    "webpack",
-    "jest",
-    "examples"
-  ],
-  "types": [
-    "typePatches"
+    "dist",
+    "examples",
+    "webpack.config.ts",
+    "**/__tests__/**/*"
   ]
 }

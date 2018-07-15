@@ -4224,12 +4224,6 @@ querystringify@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-1.0.0.tgz#6286242112c5b712fa654e526652bf6a13ff05cb"
 
-raf@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.0.tgz#a28876881b4bc2ca9117d4138163ddb80f781575"
-  dependencies:
-    performance-now "^2.1.0"
-
 randomatic@^1.1.3:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/randomatic/-/randomatic-1.1.7.tgz#c7abe9cc8b87c0baa876b19fde83fd464797e38c"
@@ -5298,7 +5292,7 @@ tsutils@^1.4.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-1.9.1.tgz#b9f9ab44e55af9681831d5f28d0aeeaf5c750cb0"
 
-tsutils@^2.12.1, tsutils@^2.13.0, tsutils@^2.13.1, tsutils@^2.24.0:
+tsutils@^2.12.1, tsutils@^2.13.1, tsutils@^2.24.0:
   version "2.26.1"
   resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-2.26.1.tgz#9e4a0cb9ff173863f34c22a961969081270d1878"
   dependencies:
@@ -5474,8 +5468,8 @@ uuid@^3.0.0, uuid@^3.0.1, uuid@^3.1.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.2.1.tgz#12c528bb9d58d0b9265d9a2f6f0fe8be17ff1f14"
 
 v8flags@^3.0.0:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/v8flags/-/v8flags-3.0.2.tgz#ad6a78a20a6b23d03a8debc11211e3cc23149477"
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/v8flags/-/v8flags-3.1.1.tgz#42259a1461c08397e37fe1d4f1cfb59cad85a053"
   dependencies:
     homedir-polyfill "^1.0.1"
 
