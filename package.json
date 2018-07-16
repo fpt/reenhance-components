@@ -1,6 +1,6 @@
 {
   "name": "reenhance-components",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
@@ -33,7 +33,6 @@
     "rxjs": "^6"
   },
   "devDependencies": {
-    "@types/react": "16.3.8",
     "@types/react-dom": "^16.0",
     "@types/recompose": "^0.26",
     "@types/jest": "^21.1.8",

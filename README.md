@@ -13,18 +13,39 @@ This module provides components which can ennhance their children into stateful,
 
 They are neither HoCs or interactive components but components based on 'Function as a child component' pattern to enhance their children by encapsulating them on JSX/TSX.
 
+## Installation and Usage
+
+### ES6/TS via npm
+
+```sh
+npm install reenhance-components
+```
+
+### CDN
+
+For CDN, you can use [unpkg](https://unpkg.com/):
+https://unpkg.com/reenhance-components/umd/index.min.js
+
+The global namespace is `ReenhanceComponents`:
+
+```js
+const { StateProvider, AsyncResolver, DebouncePropagator } = ReenhanceComponents;
+```
+
 ## Documentation
 
 Each components must be instantiated with initial props/state beforehand.
 
 ### AsyncResolver
 
+Resolves async function and passes its result to props of children.
+
 #### Props
 
-| Property | Type | Description |
-|:---|:---|:---|
-| subject | Function | An async function which returns promise to resolve |
-| (other props) | any | Arguments to subject |
+| Property | Type | Required | Description |
+|:---|:---|:---|:---|
+| subject | Function | Y | An async function which returns promise to resolve |
+| (other props) | any | N | Arguments to subject |
 
 #### Arguments of children
 
@@ -54,6 +75,8 @@ const Albums = ({ query }) => (
 
 ### StateProvider
 
+Provides local state and updater to children as its props.
+
 #### Props
 
 nothing
@@ -76,6 +99,39 @@ const Toggle = () => (
       ...
     )}
   </ToggleState>
+);
+```
+
+### DebouncePropagator
+
+Debounces props propagation for given milliseconds.
+
+See [Debounce of ReactiveX docs](http://reactivex.io/documentation/operators/debounce.html) for more details.
+
+#### Props
+
+| Property | Type | Required | Description |
+|:---|:---|:---|:---|
+| time | number | Y | Debounce time in milliseconds |
+| (other props) | any | N | Properties to propagete to children |
+
+#### Arguments of children
+
+| Property | Type | Description |
+|:---|:---|:---|
+| props | object | Resolved object from result of subject |
+
+#### Example
+
+```js
+const SuggestDebounce = DebouncePropagator({ status: 'loading' });
+
+const Suggest = ({ query }) => (
+  <SuggestDebounce time={'200'} query={query}>
+    {({ query, status }) => ( // Propagation of 'query' is debounced in 200ms
+      ...
+    )}
+  </SuggestDebounce>
 );
 ```
 
