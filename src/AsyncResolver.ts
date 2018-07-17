@@ -3,25 +3,21 @@ import { componentFromStream } from 'recompose';
 import { from, Observable, combineLatest } from 'rxjs';
 import { flatMap, distinctUntilKeyChanged } from 'rxjs/operators';
 
+import { merge3 as merge } from './Utils';
+
 
 interface SubjectProp<TInner, TSubjectArgs> {
   subject: (args: TSubjectArgs) => Promise<TInner>;
 }
 
 interface ChildrenProp<TInner, TOuter> {
-  children: (props: TOuter) => React.ReactElement<TInner>;
+  children: (props: TOuter) => React.ReactElement<any>;
 }
 
 type OuterProps<TInner, TSubjectArgs> =
   SubjectProp<TInner, TSubjectArgs> & ChildrenProp<SubjectProp<TInner, TSubjectArgs>, TInner>;
 
-type ChildrenType<TInner, TSubjectArgs> = React.ReactElement<SubjectProp<TInner, TSubjectArgs>>;
-
-// spreading generic types are not possible in TS 2.x
-// See https://github.com/Microsoft/TypeScript/issues/10727
-const merge: <A, B, C>(a: A, b: B, c: C) => A & B & C =
-  <A, B, C>(a: A, b: B, c: C) =>
-    Object.assign({}, a, b, c) as any;
+type ChildrenType = React.ReactElement<any>;
 
 
 export const AsyncResolver =
@@ -34,7 +30,7 @@ export const AsyncResolver =
           flatMap((props: SubjectProp<TInner, TSubjectArgs> & TSubjectArgs) => props.subject(props)),
         );
 
-      return combineLatest<OuterProps<TInner, TSubjectArgs> & TSubjectArgs, TInner, ChildrenType<TInner, TSubjectArgs>>(
+      return combineLatest<OuterProps<TInner, TSubjectArgs> & TSubjectArgs, TInner, ChildrenType>(
         props$,
         subject$,
         (props: OuterProps<TInner, TSubjectArgs> & TSubjectArgs, subject: TInner) =>

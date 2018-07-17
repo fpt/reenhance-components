@@ -1,6 +1,6 @@
 {
   "name": "reenhance-components",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
@@ -24,7 +24,7 @@
     "clean": "rm -rf dist umd examples/dist",
     "build": "NODE_ENV=production sh -c 'npm run clean && tsc && webpack -p'",
     "lint": "tslint 'src/**/*.ts{,x}'",
-    "start": "NODE_ENV=development sh -c 'webpack-dev-server --port 3000'",
+    "start": "NODE_ENV=development sh -c 'webpack-dev-server --port 3300'",
     "test": "tsc --noEmit && jest"
   },
   "dependencies": {
