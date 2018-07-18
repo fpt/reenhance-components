@@ -3,6 +3,8 @@ import { componentFromStream } from 'recompose';
 import { from, timer, combineLatest } from 'rxjs';
 import { debounce } from 'rxjs/operators';
 
+import { merge } from './Utils';
+
 
 interface TimeProp {
   time: number;
@@ -15,14 +17,8 @@ interface ChildrenProp<TInner, TOuter> {
 type OuterProps<TInner> =
   TimeProp & ChildrenProp<TimeProp & TInner, TInner> & TInner;
 
-type ChildrenType<TInner> = React.ReactElement<TInner & TimeProp>;
+type ChildrenType = React.ReactElement<any>;
 
-
-// spreading generic types are not possible in TS 2.x
-// See https://github.com/Microsoft/TypeScript/issues/10727
-const merge: <A, B>(a: A, b: B) => A & B =
-  <A, B>(a: A, b: B) =>
-    Object.assign({}, a, b) as any;
 
 export const DebouncePropagator =
   <TInner>(loadingProps?: TInner) =>
@@ -33,7 +29,7 @@ export const DebouncePropagator =
           debounce((p: OuterProps<TInner>) => timer(p.time)),
         );
 
-      return combineLatest<OuterProps<TInner>, OuterProps<TInner>, ChildrenType<TInner>>(
+      return combineLatest<OuterProps<TInner>, OuterProps<TInner>, ChildrenType>(
         props$,
         debounced$,
         (props: OuterProps<TInner>, debounced: OuterProps<TInner>) =>

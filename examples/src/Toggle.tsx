@@ -11,14 +11,16 @@ export const ToggleAlbums: React.StatelessComponent<{ one: string, two: string}>
   <ToggleState>
     {({ state, setState }: StateAndUpdater<boolean>) => (
       <>
-        <button onClick={() => setState(!state)}>genre is {state ? one : two}</button>
+        <button onClick={() => setState(!state)}>
+          genre is {state ? one : two}
+        </button>
         <GenreDebounce
           time={500}
           genre={state ? one : two}
         >
           {({ genre }) => <div>genre is {genre}</div>}
         </GenreDebounce>
-        <Albums query={state ? one : two}/>
+        <Albums query={state ? one : two} />        
       </>
     )}
   </ToggleState>

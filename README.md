@@ -29,7 +29,7 @@ https://unpkg.com/reenhance-components/umd/index.min.js
 The global namespace is `ReenhanceComponents`:
 
 ```js
-const { StateProvider, AsyncResolver, DebouncePropagator } = ReenhanceComponents;
+const { StateProvider, AsyncResolver, DebouncePropagator, ObjectHolder } = ReenhanceComponents;
 ```
 
 ## Documentation
@@ -151,6 +151,42 @@ const Suggest = ({ query }) => (
       ...
     )}
   </SuggestDebounce>
+);
+```
+
+### ObjectWatcher
+
+Watches a property of an object and passes the latest value as an argument to children.
+
+#### Parameters
+
+| Property | Type | Required | Description |
+|:---|:---|:---|:---|
+| targetObject | object | Y | Immutable object to watch its property change |
+
+#### Props
+
+| Property | Type | Required | Description |
+|:---|:---|:---|:---|
+| watch | string | Y | Name of property to watch |
+
+#### Arguments of children
+
+| Property | Type | Description |
+|:---|:---|:---|
+| (any) | object | Proxied targetObject  |
+
+#### Example
+
+```js
+const RefWatcher = ObjectWatcher(React.createRef());
+
+const DivRef = () => (
+  <RefWatcher watch="current">
+    {divRef => (
+      <div ref={divRef}>Hello ref.{divRef.current ? divRef.current.toString() : null}</div>
+    )}
+  </RefWatcher>
 );
 ```
 

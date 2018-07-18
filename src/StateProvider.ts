@@ -10,7 +10,7 @@ export interface StateAndUpdater<TState> {
 }
 
 interface OuterProps<TState> {
-  children: (props: StateAndUpdater<TState>) => React.ReactElement<StateAndUpdater<TState>>;
+  children: (props: StateAndUpdater<TState>) => React.ReactElement<any>;
 }
 
 type StateProviderType =
