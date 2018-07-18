@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { componentFromStream } from 'recompose';
 import { from, Observable, combineLatest } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { flatMap, distinctUntilKeyChanged } from 'rxjs/operators';
 
 
 interface SubjectProp<TInner, TSubjectArgs> {
@@ -25,11 +25,12 @@ const merge: <A, B, C>(a: A, b: B, c: C) => A & B & C =
 
 
 export const AsyncResolver =
-  <TInner, TSubjectArgs = {}>(initialProps?: TInner) =>
+  <TInner, TSubjectArgs = {}>(distinctKey: string = 'subject', initialProps?: TInner) =>
     componentFromStream<OuterProps<TInner, TSubjectArgs> & TSubjectArgs>(
     (props$) => {
       const subject$ = from(props$)
         .pipe(
+          distinctUntilKeyChanged(distinctKey),
           flatMap((props: SubjectProp<TInner, TSubjectArgs> & TSubjectArgs) => props.subject(props)),
         );
 

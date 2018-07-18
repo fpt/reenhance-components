@@ -53,7 +53,7 @@ const itemRenderer = (itm: Album) => (
 );
 
 const AlbumsAsyncResolver =
-  AsyncResolver<AlbumsResponse | ErrorResponse, AsyncArgs>({ resultCount: 0, results: [] });
+  AsyncResolver<AlbumsResponse | ErrorResponse, AsyncArgs>('query', { resultCount: 0, results: [] });
 
 export const Albums: React.StatelessComponent<AsyncArgs> = ({ query }) => (
   <AlbumsAsyncResolver query={query} subject={asyncFetch}>
@@ -69,4 +69,32 @@ export const Albums: React.StatelessComponent<AsyncArgs> = ({ query }) => (
       </div>
     )}
   </AlbumsAsyncResolver>
+);
+
+
+// Static version
+
+const StaticAlbumsAsyncResolver =
+  AsyncResolver<AlbumsResponse | ErrorResponse>();
+
+const staticAsyncFetch =
+  () =>
+    fetch('https://itunes.apple.com/search?term=bossa&entity=album&limit=3')
+      .then(res => res.json())
+      .catch(err => ({ error: err.toString() }));
+
+export const StaticAlbums: React.StatelessComponent<{}> = () => (
+  <StaticAlbumsAsyncResolver subject={staticAsyncFetch}>
+    {(props: AlbumsResponse & ErrorResponse) => (
+      <div>
+        {props.error || !props.results ? (
+          <p>{props.error}</p>
+        ) : (
+          <ul>
+            {props.results.map(itemRenderer)}
+          </ul>
+        )}
+      </div>
+    )}
+  </StaticAlbumsAsyncResolver>
 );

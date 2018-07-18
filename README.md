@@ -40,6 +40,13 @@ Each components must be instantiated with initial props/state beforehand.
 
 Resolves async function and passes its result to props of children.
 
+#### Parameters
+
+| Property | Type | Required | Description |
+|:---|:---|:---|:---|
+| distinctKey | string | N | Name of prop to detect changes. The default is 'subject'. |
+| initialProps | object | N | Initial props for children |
+
 #### Props
 
 | Property | Type | Required | Description |
@@ -62,7 +69,7 @@ const asyncFetch =
       .then(res => res.json())
       .catch(err => ({ error: err.toString() }));
 
-const AlbumsAsyncResolver = AsyncResolver({ resultCount: 0, results: [] });
+const AlbumsAsyncResolver = AsyncResolver('query', { resultCount: 0, results: [] });
 
 const Albums = ({ query }) => (
   <AlbumsAsyncResolver subject={asyncFetch} query={query} >
@@ -76,6 +83,12 @@ const Albums = ({ query }) => (
 ### StateProvider
 
 Provides local state and updater to children as its props.
+
+#### Parameters
+
+| Property | Type | Required | Description |
+|:---|:---|:---|:---|
+| initialState | any | Y | Initial state |
 
 #### Props
 
@@ -107,6 +120,12 @@ const Toggle = () => (
 Debounces props propagation for given milliseconds.
 
 See [Debounce of ReactiveX docs](http://reactivex.io/documentation/operators/debounce.html) for more details.
+
+#### Parameters
+
+| Property | Type | Required | Description |
+|:---|:---|:---|:---|
+| initialProps | object | N | Initial props for children |
 
 #### Props
 
