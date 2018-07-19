@@ -6,8 +6,11 @@ import { filter, flatMap, distinctUntilKeyChanged } from 'rxjs/operators';
 import { merge } from './Utils';
 
 
+type ChangeHandler = (newValue: any, oldValue: any) => void;
+
 interface OuterProps<TObject> {
   watch: string;
+  onChange?: ChangeHandler;
   children: (props: TObject) => React.ReactElement<any>;
 }
 
@@ -20,13 +23,20 @@ interface Indexable {
 
 // ProxeeHandler<T extends object, TOut extends object>
 const makeWatchProxy =
-  <TObject extends Indexable>(targetObject: TObject, watchProp: string, subject$: BehaviorSubject<any>) =>
+  <TObject extends Indexable>(
+    targetObject: TObject,
+    subject$: BehaviorSubject<any>,
+    watchProp: string,
+    onChange?: ChangeHandler,
+  ) =>
     new Proxy<TObject>(targetObject, {
       set: (target: TObject, name: string, value: any) => {
+        const oldValue = target[name];
         target[name] = value;
 
         if (name === watchProp) {
           subject$.next({ name, value });
+          onChange && onChange(value, oldValue);
         }
         return true;
       },
@@ -44,7 +54,7 @@ export const ObjectWatcher =
           distinctUntilKeyChanged('watch'),
           flatMap(
             (props: OuterProps<TObject>) =>
-              of(makeWatchProxy<TObject>(targetObject, props.watch, observation$)),
+              of(makeWatchProxy<TObject>(targetObject, observation$, props.watch, props.onChange)),
           ),
         );
 

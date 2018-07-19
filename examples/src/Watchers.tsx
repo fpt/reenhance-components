@@ -7,7 +7,10 @@ import { ObjectWatcher } from 'reenhance-components';
 const RefWatcher = ObjectWatcher<React.RefObject<any>>(React.createRef());
 
 export const DivRef: React.StatelessComponent<React.Props<{}>> = () => (
-  <RefWatcher watch="current">
+  <RefWatcher
+    watch="current"
+    onChange={(newValue: any, oldValue: any) => console.log('yay! ' + oldValue + ' -> ' + newValue)}
+  >
     {(divRef: any) => (
       <div ref={divRef}>Hello ref.{divRef.current ? divRef.current.toString() : null}</div>
     )}
