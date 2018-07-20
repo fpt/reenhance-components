@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { Albums, StaticAlbums } from './ItunesMusic';
 import { ToggleAlbums } from './Toggle';
 import { ImageWithLoading } from './Image';
-import { DivRef, Counter } from './Watchers';
+import { DivRef, Counter, InputWatcher } from './Watchers';
 
 
 const appElementId = '#root';
@@ -27,6 +27,9 @@ const App: React.StatelessComponent<React.Props<{}>> = () => (
 
       <h3>ObjWatcher</h3>
       <Counter />
+
+      <h3>InputWatcher</h3>
+      <InputWatcher />
     </div>
   </>
 );

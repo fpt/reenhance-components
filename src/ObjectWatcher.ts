@@ -45,11 +45,11 @@ const makeWatchProxy =
 
 
 export const ObjectWatcher =
-  <TObject extends Indexable>(targetObject: TObject) =>
-    componentFromStream<OuterProps<TObject>>(
-      (props$: Subscribable<OuterProps<TObject>>) => {
-        const observation$ = new BehaviorSubject<any>(null);
+  <TObject extends Indexable>(targetObject: TObject) => {
+    const observation$ = new BehaviorSubject<any>(null);
 
+    return componentFromStream<OuterProps<TObject>>(
+      (props$: Subscribable<OuterProps<TObject>>) => {
         const proxy$ = from(props$).pipe(
           distinctUntilKeyChanged('watch'),
           flatMap(
@@ -66,3 +66,4 @@ export const ObjectWatcher =
             props.children(proxy),
         );
       });
+  }

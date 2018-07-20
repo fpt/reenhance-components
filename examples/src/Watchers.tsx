@@ -21,15 +21,39 @@ export const DivRef: React.StatelessComponent<React.Props<{}>> = () => (
 interface CounterState {
   value: number;
 }
-const StateWatcher = ObjectWatcher<CounterState>({ value: 1 });
+const CounterStateWatcher = ObjectWatcher<CounterState>({ value: 1 });
 
 export const Counter: React.StatelessComponent<React.Props<{}>> = () => (
-  <StateWatcher watch="value">
+  <CounterStateWatcher watch="value">
     {(counter: CounterState) => (
       <div>
         Count is {counter.value}
         <button onClick={() => counter.value = counter.value + 1}>+</button>
       </div>
     )}
-  </StateWatcher>
+  </CounterStateWatcher>
 );
+
+
+const InputStateWatcher = ObjectWatcher({ value: '' });
+
+export const InputWatcher = () => (
+  <div>
+    <InputStateWatcher watch="value">
+      {(state) => (
+        <div>
+          Input: <input value={state.value} onChange={(e) => state.value = e.target.value} />
+        </div>
+      )}
+    </InputStateWatcher>
+
+    <InputStateWatcher watch="value">
+      {(state) => (
+        <div>
+          Current: <span>{state.value}</span>
+        </div>
+      )}
+    </InputStateWatcher>
+  </div>
+);
+
