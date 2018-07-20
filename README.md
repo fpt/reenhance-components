@@ -44,7 +44,7 @@ Resolves async function and passes its result to props of children.
 
 | Property | Type | Required | Description |
 |:---|:---|:---|:---|
-| distinctKey | string | N | Name of prop to detect changes. The default is 'subject'. |
+| distinctKey | string | N | Name of prop to detect changes. Subject function is evaluated everytime value of the props is changed. The default is 'subject'. |
 | initialProps | object | N | Initial props for children |
 
 #### Props
@@ -201,6 +201,10 @@ A: It depends. If the state or API response is local and per-instance, probably 
 A: Not sure. I think they are almost same. 😉
 - Q: Can I rename arguments, 'state' and 'setState' of StateProvider?  
 A: Rename them in destructuring like `({ state: isOpen, setState: setIsOpen })`.
+- Q: Why `StateProvider` passes the state as a property of object? It's confusing.  
+A: One reason is for renaming. Another reason is `state` and `setState` are inseparatable in `StateProvider`. Try `ObjectWatcher` if you really don't want to use `setState`.
+- Q: Why don't you make `AjaxResolver`? It will be convenient.
+A: Requesting Ajax causes dependency to other APIs like `fetch`, `fetchJsonp`, `Axios`, etc. This module is intended to solve only common part of problems. Feel free to make your own module using this. 😎
 
 ## For contributors
 
