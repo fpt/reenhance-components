@@ -121,7 +121,7 @@ See [Debounce of ReactiveX docs](http://reactivex.io/documentation/operators/deb
 
 | Property | Type | Required | Description |
 |:---|:---|:---|:---|
-| initialProps | object | N | Initial props for children |
+| initialProps | object | Y | Initial props for children |
 
 #### Props
 

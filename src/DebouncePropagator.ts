@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { componentFromStream } from 'recompose';
 import { from, timer, combineLatest } from 'rxjs';
-import { debounce } from 'rxjs/operators';
+import { debounce, startWith } from 'rxjs/operators';
 
 import { merge } from './Utils';
 
@@ -21,20 +21,19 @@ type ChildrenType = React.ReactElement<any>;
 
 
 export const DebouncePropagator =
-  <TInner>(loadingProps?: TInner) =>
+  <TInner>(loadingProps: TInner) =>
     componentFromStream<OuterProps<TInner>>(
     (props$) => {
       const debounced$ = from(props$)
         .pipe(
           debounce((p: OuterProps<TInner>) => timer(p.time)),
+          startWith(loadingProps),
         );
 
       return combineLatest<OuterProps<TInner>, OuterProps<TInner>, ChildrenType>(
         props$,
         debounced$,
         (props: OuterProps<TInner>, debounced: OuterProps<TInner>) =>
-          props !== debounced && loadingProps ?
-            props.children(merge(props, loadingProps)) :
-            debounced.children(debounced),
+          props.children(debounced),
       );
     });

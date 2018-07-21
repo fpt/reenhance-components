@@ -12,7 +12,23 @@ describe('Simple bootstrap tests', () => {
 });
 
 describe('Tests with dummy children', () => {
-  it('can get ref object of children', async () => {
+  it('can pass initial value', () => {
+    const ValuePropagator = DebouncePropagator<object>({ value: 3 });
+
+    let wrapper = mount(
+      <ValuePropagator time={1} value={4}>
+        {({ value }) => <span>{value}</span>}
+      </ValuePropagator>,
+    );
+
+    wrapper = wrapper.update();
+
+    const span = wrapper.find('span');
+    expect(span.length).toBe(1); 
+    expect(span.text()).toBe('3'); 
+  });
+
+  it('can pass new value after debounce time', async () => {
     const ValuePropagator = DebouncePropagator<object>({ value: 3 });
 
     let wrapper = mount(

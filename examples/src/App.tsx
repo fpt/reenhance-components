@@ -5,6 +5,7 @@ import { Albums, StaticAlbums } from './ItunesMusic';
 import { ToggleAlbums } from './Toggle';
 import { ImageWithLoading } from './Image';
 import { DivRef, Counter, InputWatcher } from './Watchers';
+import { SuggestedInput } from './Suggest';
 
 
 const appElementId = '#root';
@@ -30,6 +31,9 @@ const App: React.StatelessComponent<React.Props<{}>> = () => (
 
       <h3>InputWatcher</h3>
       <InputWatcher />
+
+      <h3>SuggestedInput</h3>
+      <SuggestedInput />
     </div>
   </>
 );

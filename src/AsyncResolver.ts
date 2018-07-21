@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { componentFromStream } from 'recompose';
-import { from, Observable, combineLatest } from 'rxjs';
-import { flatMap, distinctUntilKeyChanged } from 'rxjs/operators';
+import { of, from, Observable, combineLatest } from 'rxjs';
+import { flatMap, distinctUntilKeyChanged, startWith } from 'rxjs/operators';
 
 import { merge3 as merge } from './Utils';
 
@@ -28,6 +28,7 @@ export const AsyncResolver =
         .pipe(
           distinctUntilKeyChanged(distinctKey),
           flatMap((props: SubjectProp<TInner, TSubjectArgs> & TSubjectArgs) => props.subject(props)),
+          startWith(initialProps),
         );
 
       return combineLatest<OuterProps<TInner, TSubjectArgs> & TSubjectArgs, TInner, ChildrenType>(
