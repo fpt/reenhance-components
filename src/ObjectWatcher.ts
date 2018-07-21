@@ -3,8 +3,6 @@ import { componentFromStream } from 'recompose';
 import { of, from, combineLatest, Subscribable, BehaviorSubject } from 'rxjs';
 import { filter, flatMap, distinctUntilKeyChanged } from 'rxjs/operators';
 
-import { merge } from './Utils';
-
 
 type ChangeHandler = (newValue: any, oldValue: any) => void;
 

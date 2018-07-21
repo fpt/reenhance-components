@@ -3,8 +3,6 @@ import { componentFromStream } from 'recompose';
 import { of, from, Observable, combineLatest } from 'rxjs';
 import { flatMap, distinctUntilKeyChanged, startWith } from 'rxjs/operators';
 
-import { merge3 as merge } from './Utils';
-
 
 interface SubjectProp<TInner, TSubjectArgs> {
   subject: (args: TSubjectArgs) => Promise<TInner>;
@@ -35,6 +33,6 @@ export const AsyncResolver =
         props$,
         subject$,
         (props: OuterProps<TInner, TSubjectArgs> & TSubjectArgs, subject: TInner) =>
-          props.children(merge(props, initialProps, subject)),
+          props.children(subject),
       );
     });

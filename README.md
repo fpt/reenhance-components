@@ -5,7 +5,7 @@ reenhance-components
 
 A collection of React components which enhance children by providing Async/State functionality in JSX/TSX.
 
-They are neither visual components nor HoCs but components based on 'Function as a child component' pattern to enhance their children by encapsulating them in JSX/TSX.
+They are neither visual components nor HoCs but components based on 'Function as a child component' pattern to enhance their children by surrounding them.
 
 Works well when you create component which have some local states (e.g. radio group, toggle show/hide) or needs to show contents from APIs without propagating to global state (e.g. suggest, preview).
 
@@ -34,13 +34,13 @@ Each components must be instantiated with initial parameters before using them i
 
 ### AsyncResolver
 
-Resolves async function and passes its result to props of children.
+Resolves async function and passes its result to children as props.
 
 #### Parameters
 
 | Property | Type | Required | Description |
 |:---|:---|:---|:---|
-| distinctKey | string | N | Name of prop to detect changes. Subject function is evaluated everytime value of the props is changed. The default is 'subject'. |
+| distinctKey | string | N | Name of prop to detect changes. Subject function is evaluated everytime value of the prop is changed. The default is 'subject'. |
 | initialProps | object | N | Initial props for children |
 
 #### Props
@@ -200,7 +200,7 @@ A: Rename them in destructuring like `({ state: isOpen, setState: setIsOpen })`.
 - Q: Why `StateProvider` passes the state as a property of object? It's confusing.  
 A: One reason is for renaming. Another reason is `state` and `setState` are inseparatable in `StateProvider`. Try `ObjectWatcher` if you really don't want to use `setState`.
 - Q: Why don't you make `AjaxResolver`? It will be convenient.
-A: Requesting Ajax causes dependency to other APIs like `fetch`, `fetchJsonp`, `Axios`, etc. This module is intended to solve only common part of problems. Feel free to make your own module using this. 😎
+A: Requesting Ajax causes dependency to other APIs like `fetch`, `fetchJsonp`, `Axios`, etc. This module is intended to solve only common part of problems.
 
 ## For contributors
 

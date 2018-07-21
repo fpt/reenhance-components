@@ -3,8 +3,6 @@ import { componentFromStream } from 'recompose';
 import { from, timer, combineLatest } from 'rxjs';
 import { debounce, startWith } from 'rxjs/operators';
 
-import { merge } from './Utils';
-
 
 interface TimeProp {
   time: number;

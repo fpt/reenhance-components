@@ -52,7 +52,7 @@ describe('Tests with dummy children', () => {
     const ObjectResolver = AsyncResolver<object>('subject', { value: 3 });
 
     let wrapper = mount(
-      <ObjectResolver subject={() => new Promise(resolve => setTimeout(() => resolve({ value: 4 }), 10))}>
+      <ObjectResolver subject={() => new Promise(resolve => setTimeout(() => resolve({ value: 4 }), 0))}>
         {({ value }) => <span>{value}</span>}
       </ObjectResolver>,
     );
@@ -79,5 +79,30 @@ describe('Tests with dummy children', () => {
     const span = wrapper.find('span');
     expect(span.length).toBe(1); 
     expect(span.text()).toBe('4'); 
+  });
+
+  it('can pass parameter to subject', async () => {
+    const ObjectResolver = AsyncResolver<object>('add', { value: 3 });
+
+    let wrapper = mount(
+      <ObjectResolver subject={({ add }) => new Promise(resolve => resolve({ value: 4 + add }))} add={5}>
+        {({ value }) => <span>{value}</span>}
+      </ObjectResolver>,
+    );
+
+    await new Promise(resolve => setTimeout(resolve, 10));
+    wrapper = wrapper.update();
+
+    let span = wrapper.find('span');
+    expect(span.length).toBe(1); 
+    expect(span.text()).toBe('9'); 
+
+    wrapper.setProps({ add: 7 });
+    await new Promise(resolve => setTimeout(resolve, 10));
+    wrapper = wrapper.update();
+
+    span = wrapper.find('span');
+    expect(span.length).toBe(1); 
+    expect(span.text()).toBe('11'); 
   });
 });
