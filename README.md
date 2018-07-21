@@ -3,15 +3,9 @@ reenhance-components
 
 A collection of React components which enhance children by providing Async/State functionality in JSX/TSX.
 
-Works well when you create a component which has some local states (e.g. radio group, toggle show/hide) or needs to show contents from API without propagating to global state (e.g. suggest, preview).
+They are neither visual components nor HoCs but components based on 'Function as a child component' pattern to enhance their children by encapsulating them in JSX/TSX.
 
----
-
-## What is this?
-
-This module provides components which can ennhance their children into stateful, data-feeded components.
-
-They are neither HoCs or interactive components but components based on 'Function as a child component' pattern to enhance their children by encapsulating them on JSX/TSX.
+Works well when you create component which have some local states (e.g. radio group, toggle show/hide) or needs to show contents from APIs without propagating to global state (e.g. suggest, preview).
 
 ## Installation and Usage
 
@@ -34,7 +28,7 @@ const { StateProvider, AsyncResolver, DebouncePropagator, ObjectHolder } = Reenh
 
 ## Documentation
 
-Each components must be instantiated with initial props/state beforehand.
+Each components must be instantiated with initial parameters before using them in JSX/TSX.
 
 ### AsyncResolver
 
