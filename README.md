@@ -1,6 +1,8 @@
 reenhance-components
 ============
 
+[![CircleCI](https://circleci.com/gh/fpt/reenhance-components/tree/master.svg?style=svg)](https://circleci.com/gh/fpt/reenhance-components/tree/master)
+
 A collection of React components which enhance children by providing Async/State functionality in JSX/TSX.
 
 They are neither visual components nor HoCs but components based on 'Function as a child component' pattern to enhance their children by encapsulating them in JSX/TSX.
