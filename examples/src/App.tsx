@@ -6,6 +6,7 @@ import { ToggleAlbums } from './Toggle';
 import { ImageWithLoading } from './Image';
 import { DivRef, Counter, InputWatcher } from './Watchers';
 import { SuggestedInput } from './Suggest';
+import { SVGHockay } from './Hockay';
 
 
 const appElementId = '#root';
@@ -34,6 +35,9 @@ const App: React.StatelessComponent<React.Props<{}>> = () => (
 
       <h3>SuggestedInput</h3>
       <SuggestedInput />
+
+      <h3>SVG Hockay</h3>
+      <SVGHockay />
     </div>
   </>
 );

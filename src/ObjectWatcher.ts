@@ -4,10 +4,10 @@ import { of, from, combineLatest, Subscribable, BehaviorSubject } from 'rxjs';
 import { filter, flatMap, distinctUntilKeyChanged } from 'rxjs/operators';
 
 
-type ChangeHandler = (newValue: any, oldValue: any) => void;
+type ChangeHandler = (newValue: any, oldValue: any, propName: string) => void;
 
 interface OuterProps<TObject> {
-  watch: string;
+  watch: string | string[];
   onChange?: ChangeHandler;
   children: (props: TObject) => React.ReactElement<any>;
 }
@@ -24,7 +24,7 @@ const makeWatchProxy =
   <TObject extends Indexable>(
     targetObject: TObject,
     subject$: BehaviorSubject<any>,
-    watchProp: string,
+    watchProps: string | string[],
     onChange?: ChangeHandler,
   ) =>
     new Proxy<TObject>(targetObject, {
@@ -32,9 +32,9 @@ const makeWatchProxy =
         const oldValue = target[name];
         target[name] = value;
 
-        if (name === watchProp) {
+        if (Array.isArray(watchProps) ? watchProps.includes(name) : name === watchProps) {
           subject$.next({ name, value });
-          onChange && onChange(value, oldValue);
+          onChange && onChange(value, oldValue, name);
         }
         return true;
       },

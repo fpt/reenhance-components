@@ -165,8 +165,8 @@ Watches a property of an object and passes the latest value as an argument to ch
 
 | Property | Type | Required | Description |
 |:---|:---|:---|:---|
-| watch | string | Y | Name of property to watch |
-| onChange | function | N | Called when the value of watching props is changed. Call signature is (newValue: any, oldValue: any) => void |
+| watch | string | string[] | Y | Name(s) of property to watch |
+| onChange | function | N | Called when the value of watching props is changed. Call signature is (newValue: any, oldValue: any, propName: string) => void |
 
 #### Arguments of children
 

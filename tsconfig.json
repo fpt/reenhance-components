@@ -3,7 +3,7 @@
     "allowJs": false,
     "baseUrl": "./src",
     "jsx": "react",
-    "lib": ["es6", "dom"],
+    "lib": ["es2017", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
