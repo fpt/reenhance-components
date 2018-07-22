@@ -21,11 +21,12 @@
   ],
   "description": "A collection of react nodes which provide functional operation",
   "scripts": {
-    "clean": "rm -rf dist umd examples/dist",
+    "clean": "rm -rf dist umd coverage examples/dist",
     "build": "NODE_ENV=production sh -c 'npm run clean && tsc && webpack -p'",
     "lint": "tslint 'src/**/*.ts{,x}'",
     "start": "NODE_ENV=development sh -c 'webpack-dev-server --port 3300'",
-    "test": "tsc --noEmit && jest"
+    "test": "tsc --noEmit && jest",
+    "test:badges": "npm test && jest-coverage-badges"
   },
   "dependencies": {
     "react": "^16.4",
@@ -46,6 +47,7 @@
     "fetch-jsonp": "^1.1.3",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.4.1",
+    "jest-coverage-badges": "^1.0.0",
     "jest-enzyme": "^6.0.2",
     "react-dom": "^16.3",
     "react-test-renderer": "^16.4.1",
@@ -78,10 +80,15 @@
     },
     "testRegex": "/__tests__/.*\\.spec\\.tsx?$",
     "collectCoverage": true,
-    "collectCoverageFrom": [  
+    "collectCoverageFrom": [
       "src/**/*.ts?(x)",
       "!src/index.ts",
       "!src/**/__tests__/*.ts?(x)"
+    ],
+    "coverageReporters": [
+      "json-summary", 
+      "text",
+      "lcov"
     ],
     "moduleFileExtensions": [
       "ts",

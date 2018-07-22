@@ -2,6 +2,7 @@ reenhance-components
 ============
 
 [![CircleCI](https://circleci.com/gh/fpt/reenhance-components/tree/master.svg?style=shield)](https://circleci.com/gh/fpt/reenhance-components/tree/master)
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
 A collection of React components which enhance children by providing Async/State functionality in JSX/TSX.
 
