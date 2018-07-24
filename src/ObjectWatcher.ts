@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { componentFromStream } from 'recompose';
-import { of, from, combineLatest, Subscribable, BehaviorSubject } from 'rxjs';
-import { filter, flatMap, distinctUntilKeyChanged } from 'rxjs/operators';
+import { of, from, combineLatest, forkJoin, Subscribable, BehaviorSubject } from 'rxjs';
+import { filter, flatMap, switchMapTo, zip, distinctUntilKeyChanged } from 'rxjs/operators';
 
 
 type ChangeHandler = (newValue: any, oldValue: any, propName: string) => void;
 
 interface OuterProps<TObject> {
-  watch: string | string[];
   onChange?: ChangeHandler;
   children: (props: TObject) => React.ReactElement<any>;
 }
@@ -18,23 +17,27 @@ interface Indexable {
   [name: string]: any;
 }
 
+interface PropChange {
+  newValue: any;
+  prevValue: any;
+  name: string;
+}
+
 
 // ProxeeHandler<T extends object, TOut extends object>
 const makeWatchProxy =
   <TObject extends Indexable>(
     targetObject: TObject,
-    subject$: BehaviorSubject<any>,
+    subject$: BehaviorSubject<PropChange>,
     watchProps: string | string[],
-    onChange?: ChangeHandler,
   ) =>
     new Proxy<TObject>(targetObject, {
       set: (target: TObject, name: string, value: any) => {
-        const oldValue = target[name];
+        const prevValue = target[name];
         target[name] = value;
 
         if (Array.isArray(watchProps) ? watchProps.includes(name) : name === watchProps) {
-          subject$.next({ name, value });
-          onChange && onChange(value, oldValue, name);
+          subject$.next({ name, prevValue, newValue: value });
         }
         return true;
       },
@@ -43,24 +46,26 @@ const makeWatchProxy =
 
 
 export const ObjectWatcher =
-  <TObject extends Indexable>(targetObject: TObject) => {
+  <TObject extends Indexable>(targetObject: TObject, watchProps: string | string[]) => {
     const observation$ = new BehaviorSubject<any>(null);
+    const proxy = makeWatchProxy<TObject>(targetObject, observation$, watchProps);
 
     return componentFromStream<OuterProps<TObject>>(
       (props$: Subscribable<OuterProps<TObject>>) => {
-        const proxy$ = from(props$).pipe(
-          distinctUntilKeyChanged('watch'),
-          flatMap(
-            (props: OuterProps<TObject>) =>
-              of(makeWatchProxy<TObject>(targetObject, observation$, props.watch, props.onChange)),
+        const change$ = from(props$).pipe(
+          distinctUntilKeyChanged('onChange'),
+          switchMapTo(observation$,
+            (props, obs) => {
+              props.onChange && obs && props.onChange(obs.newValue, obs.prevValue, obs.name);
+              return props;
+            },
           ),
         );
 
-        return combineLatest<OuterProps<TObject>, TObject, BehaviorSubject<any>, ChildrenType>(
-          props$,
-          proxy$,
+        return combineLatest<OuterProps<TObject>, PropChange, ChildrenType>(
+          change$,
           observation$,
-          (props: OuterProps<TObject>, proxy: TObject, observation: BehaviorSubject<any>) =>
+          (props: OuterProps<TObject>, obs: PropChange) =>
             props.children(proxy),
         );
       });

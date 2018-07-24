@@ -60,10 +60,10 @@ interface DraggableProps {
 
 const DraggableCircleBuilder: (initX: number, initY: number) => React.StatelessComponent<DraggableProps> =
   (initX, initY) => {
-    const DiscState = ObjectWatcher<DraggableState>(new DraggableState(initX, initY));
+    const DiscState = ObjectWatcher<DraggableState>(new DraggableState(initX, initY), ['posX', 'posY']);
 
     return ({ color }) => (
-      <DiscState watch={['posX', 'posY']}>
+      <DiscState>
         {obj => (
           <circle
             cx={obj.posX}

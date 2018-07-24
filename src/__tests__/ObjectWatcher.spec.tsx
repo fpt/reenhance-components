@@ -26,12 +26,12 @@ describe('Simple bootstrap tests', () => {
 describe('Tests with dummy children', () => {
   it('can get ref object of children', () => {
     const refObject = React.createRef();
-    const RefHolder = ObjectWatcher<React.RefObject<any>>(refObject);
+    const RefHolder = ObjectWatcher<React.RefObject<any>>(refObject, 'current');
 
     const mockChange = jest.fn();
 
     const wrapper = mount(
-      <RefHolder watch="current" onChange={() => mockChange()}>
+      <RefHolder onChange={() => mockChange()}>
         {ref => <img ref={ref} />}
       </RefHolder>,
     );
@@ -44,12 +44,12 @@ describe('Tests with dummy children', () => {
 
   it('can watch object', () => {
     const pointObject = new PointClass();
-    const PointWatcher = ObjectWatcher<PointClass>(pointObject);
+    const PointWatcher = ObjectWatcher<PointClass>(pointObject, ['x', 'y']);
 
     const mockChange = jest.fn();
 
     const wrapper = mount(
-      <PointWatcher watch={['x', 'y']} onChange={() => mockChange()}>
+      <PointWatcher onChange={() => mockChange()}>
         {obj => <div onClick={() => obj.setPos(4, 5)}><span>{obj.x}</span><pre>{obj.y}</pre></div>}
       </PointWatcher>,
     );

@@ -4,11 +4,10 @@ import { render } from 'react-dom';
 import { ObjectWatcher } from 'reenhance-components';
 
 
-const RefWatcher = ObjectWatcher<React.RefObject<any>>(React.createRef());
+const RefWatcher = ObjectWatcher<React.RefObject<any>>(React.createRef(), 'current');
 
 export const DivRef: React.StatelessComponent<React.Props<{}>> = () => (
   <RefWatcher
-    watch="current"
     onChange={(newValue: any, oldValue: any) => console.log('yay! ' + oldValue + ' -> ' + newValue)}
   >
     {(divRef: any) => (
@@ -21,10 +20,10 @@ export const DivRef: React.StatelessComponent<React.Props<{}>> = () => (
 interface CounterState {
   value: number;
 }
-const CounterStateWatcher = ObjectWatcher<CounterState>({ value: 1 });
+const CounterStateWatcher = ObjectWatcher<CounterState>({ value: 1 }, 'value');
 
 export const Counter: React.StatelessComponent<React.Props<{}>> = () => (
-  <CounterStateWatcher watch="value">
+  <CounterStateWatcher>
     {(counter: CounterState) => (
       <div>
         Count is {counter.value}
@@ -35,20 +34,20 @@ export const Counter: React.StatelessComponent<React.Props<{}>> = () => (
 );
 
 
-const InputStateWatcher = ObjectWatcher({ value: '' });
+const InputStateWatcher = ObjectWatcher({ value: '' }, 'value');
 
 export const InputWatcher = () => (
   <div>
-    <InputStateWatcher watch="value">
-      {(state) => (
+    <InputStateWatcher>
+      {state => (
         <div>
-          Input: <input value={state.value} onChange={(e) => state.value = e.target.value} />
+          Input: <input value={state.value} onChange={e => state.value = e.target.value} />
         </div>
       )}
     </InputStateWatcher>
 
-    <InputStateWatcher watch="value">
-      {(state) => (
+    <InputStateWatcher>
+      {state => (
         <div>
           Current: <span>{state.value}</span>
         </div>
