@@ -62,10 +62,11 @@ export const ObjectWatcher =
           ),
         );
 
-        return combineLatest<OuterProps<TObject>, PropChange, ChildrenType>(
-          change$,
+        return combineLatest<OuterProps<TObject>, PropChange, any, ChildrenType>(
+          props$,
           observation$,
-          (props: OuterProps<TObject>, obs: PropChange) =>
+          change$,
+          (props: OuterProps<TObject>, obs: PropChange, _: any) =>
             props.children(proxy),
         );
       });

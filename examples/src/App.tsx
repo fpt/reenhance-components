@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 
 import { Albums, StaticAlbums } from './ItunesMusic';
 import { ToggleAlbums } from './Toggle';
-import { ImageWithLoading } from './Image';
+import { IdImage } from './Image';
 import { DivRef, Counter, InputWatcher } from './Watchers';
 import { SuggestedInput } from './Suggest';
 import { SVGHockay } from './Hockay';
@@ -16,7 +16,7 @@ const App: React.StatelessComponent<React.Props<{}>> = () => (
   <>
     <div>
       <h3>Image</h3>
-      <ImageWithLoading src={'https://picsum.photos/100?rand=' + Math.floor(Math.random() * 1000)} />
+      <IdImage />
 
       <h3>Albums</h3>
       <ToggleAlbums one="jazz" two="blues" />
