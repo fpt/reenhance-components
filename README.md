@@ -4,9 +4,9 @@ reenhance-components
 [![CircleCI](https://circleci.com/gh/fpt/reenhance-components/tree/master.svg?style=shield)](https://circleci.com/gh/fpt/reenhance-components/tree/master)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
-A collection of React components which enhance children by providing Async/State functionality in JSX/TSX.
+A collection of React components which enhance children providing Async/State functionality in JSX/TSX.
 
-They are neither visual components nor HoCs but components based on 'Function as a child component' pattern to enhance their children by surrounding them.
+They are neither visual components nor HoCs but components based on 'Function as a child component' pattern to be adopted declaratively just by surrounding children.
 
 Works well when you create component which have some local states (e.g. radio group, toggle show/hide) or needs to show contents from APIs without propagating to global state (e.g. suggest, preview).
 
