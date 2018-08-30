@@ -1,6 +1,6 @@
 {
   "name": "reenhance-components",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
@@ -24,7 +24,7 @@
     "clean": "rm -rf dist umd coverage examples/dist",
     "build": "NODE_ENV=production sh -c 'npm run clean && tsc && webpack -p'",
     "lint": "tslint 'src/**/*.ts{,x}'",
-    "start": "NODE_ENV=development sh -c 'webpack-dev-server --port 3300'",
+    "start": "NODE_ENV=development sh -c 'webpack-dev-server --mode development --port 3300'",
     "test": "tsc --noEmit && jest",
     "test:badges": "npm test && jest-coverage-badges"
   },
@@ -53,14 +53,15 @@
     "react-test-renderer": "^16.4.1",
     "styled-components": "^3.3.3",
     "ts-jest": "^23.0",
-    "ts-loader": "^3.5.0",
+    "ts-loader": "^4",
     "ts-node": "^3.3.0",
     "tslint": "^5.8.0",
     "tslint-config-airbnb": "^5.4.2",
     "tslint-react": "^3.2.0",
-    "typescript": "^2.9",
-    "webpack": "^3.11.0",
-    "webpack-dev-server": "^2.9.5"
+    "typescript": "^3",
+    "webpack": "^4",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3"
   },
   "engines": {
     "node": "8.x",

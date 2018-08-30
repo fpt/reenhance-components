@@ -4,9 +4,8 @@ reenhance-components
 [![CircleCI](https://circleci.com/gh/fpt/reenhance-components/tree/master.svg?style=shield)](https://circleci.com/gh/fpt/reenhance-components/tree/master)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
-A collection of React components which enhance children providing Async/State functionality in JSX/TSX.
-
-They are neither visual components nor HoCs but components based on 'Function as a child component' pattern to be adopted declaratively just by surrounding children.
+A collection of React components which provide various functionality to child components in JSX/TSX.
+By using Render Props pattern, those components can be adopted declaratively just by surrounding children.
 
 Works well when you create component which have some local states (e.g. radio group, toggle show/hide) or needs to show contents from APIs without propagating to global state (e.g. suggest, preview).
 
@@ -185,6 +184,36 @@ const DivRef = () => (
       <div ref={divRef}>Hello ref.{divRef.current ? divRef.current.toString() : null}</div>
     )}
   </RefWatcher>
+);
+```
+
+### Compose (beta)
+
+Composes multiple Components which have Render Props as their child.
+
+#### Props
+
+| Property | Type | Required | Description |
+|:---|:---|:---|:---|
+| children[i] | Component | Y | A component which have Render Props as their child. |
+| children[n - 1] | Component | Y | A render function which receives all props from preceding components |
+
+#### Example
+
+```js
+const BooleanState = StateProvider<boolean>(true);
+const NumericState = StateProvider<number>(3);
+
+const MultiStateDiv = () => (
+  <Compose>
+    <BooleanState />
+    <NumericState />
+    {(b: StateAndUpdater<boolean>, n: StateAndUpdater<number>) => (
+      <div>
+        {b.state.toString()}:{n.state}
+      </div>
+    )}
+  </Compose>
 );
 ```
 

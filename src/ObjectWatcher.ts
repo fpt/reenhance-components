@@ -8,7 +8,7 @@ type ChangeHandler = (newValue: any, oldValue: any, propName: string) => void;
 
 interface OuterProps<TObject> {
   onChange?: ChangeHandler;
-  children: (props: TObject) => React.ReactElement<any>;
+  children?: (props: TObject) => React.ReactElement<any>;
 }
 
 type ChildrenType = React.ReactElement<any>;
@@ -67,7 +67,7 @@ export const ObjectWatcher =
           observation$,
           change$,
           (props: OuterProps<TObject>, obs: PropChange, _: any) =>
-            props.children(proxy),
+            props.children ? props.children(proxy) : React.createElement(React.Fragment),
         );
       });
   };
