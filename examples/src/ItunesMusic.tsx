@@ -87,12 +87,14 @@ export const StaticAlbums: React.StatelessComponent<{}> = () => (
   <StaticAlbumsAsyncResolver subject={staticAsyncFetch}>
     {(props: AlbumsResponse & ErrorResponse) => (
       <div>
-        {props.error || !props.results ? (
-          <p>{props.error}</p>
-        ) : (
-          <ul>
-            {props.results.map(itemRenderer)}
-          </ul>
+        {props && (
+          props.error || !props.results ? (
+            <p>{props.error}</p>
+          ) : (
+            <ul>
+              {props.results.map(itemRenderer)}
+            </ul>
+          )
         )}
       </div>
     )}

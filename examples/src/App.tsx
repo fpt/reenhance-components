@@ -7,6 +7,7 @@ import { IdImage } from './Image';
 import { DivRef, Counter, InputWatcher } from './Watchers';
 import { SuggestedInput } from './Suggest';
 import { SVGHockay } from './Hockay';
+import { ComposedImage } from './Composed';
 
 
 const appElementId = '#root';
@@ -38,6 +39,9 @@ const App: React.StatelessComponent<React.Props<{}>> = () => (
 
       <h3>SVG Hockay</h3>
       <SVGHockay />
+
+      <h3>Compose</h3>
+      <ComposedImage src={'https://picsum.photos/100/100/?image=1000'} />
     </div>
   </>
 );

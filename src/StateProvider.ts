@@ -10,7 +10,7 @@ export interface StateAndUpdater<TState> {
 }
 
 interface OuterProps<TState> {
-  children: (props: StateAndUpdater<TState>) => React.ReactElement<any>;
+  children?: (props: StateAndUpdater<TState>) => React.ReactElement<any>;
 }
 
 type StateProviderType =
@@ -21,5 +21,6 @@ type StateProviderType =
 export const StateProvider: StateProviderType =
   <TState, TExtOuter = {}>(initialState: TState | mapper<TExtOuter, TState>) =>
     withState<OuterProps<TState> & TExtOuter, TState, 'state', 'setState'>('state', 'setState', initialState)(
-      (props: OuterProps<TState> & StateAndUpdater<TState>) => props.children(props),
+      (props: OuterProps<TState> & StateAndUpdater<TState>) =>
+        props.children ? props.children(props) : null,
     );

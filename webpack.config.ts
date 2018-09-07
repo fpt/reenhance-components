@@ -47,6 +47,7 @@ const devConfig: Config = {
       template: path.resolve(__dirname, 'examples/index.html'),
     }) as any,
   ],
+  devtool: 'source-map',
 };
 
 const PATHS = {
@@ -68,10 +69,6 @@ const prodConfig: Config = {
     umdNamedDefine: true,
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      comments: false,
-    }),
   ],
 };
 
