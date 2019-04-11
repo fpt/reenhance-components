@@ -1,6 +1,6 @@
 {
   "name": "reenhance-components",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
@@ -25,7 +25,7 @@
     "build": "NODE_ENV=production sh -c 'npm run clean && tsc && webpack -p'",
     "lint": "tslint 'src/**/*.ts{,x}'",
     "start": "NODE_ENV=development sh -c 'webpack-dev-server --mode development --port 3300'",
-    "test": "tsc --noEmit && jest",
+    "test": "npm run lint && tsc --noEmit && jest",
     "test:badges": "npm test && jest-coverage-badges"
   },
   "dependencies": {
@@ -55,17 +55,13 @@
     "ts-jest": "^23.0",
     "ts-loader": "^4",
     "ts-node": "^3.3.0",
-    "tslint": "^5.8.0",
-    "tslint-config-airbnb": "^5.4.2",
-    "tslint-react": "^3.2.0",
+    "tslint": "^5.15.0",
+    "tslint-config-airbnb": "^5.11",
+    "tslint-react": "^4.0",
     "typescript": "^3",
     "webpack": "^4",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3"
-  },
-  "engines": {
-    "node": "8.x",
-    "yarn": "1.x"
   },
   "files": [
     "README.md",
@@ -75,6 +71,10 @@
     "package.json",
     "umd"
   ],
+  "engines" : { 
+    "node": ">=8.0.0 <11.0.0",
+    "yarn": "^1.x"
+  },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/src/__tests__/setup.ts",
     "transform": {

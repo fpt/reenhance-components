@@ -42,4 +42,4 @@ export const Compose =
     );
 
     return resultFn();
-  }
+  };

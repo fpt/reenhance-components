@@ -42,7 +42,7 @@ describe('Tests with dummy children', () => {
     );
 
     let div = wrapper.find('div');
-    expect(div.length).toBe(1); 
+    expect(div.length).toBe(1);
 
     let stateProps = div.props().props;
     expect(stateProps.state).toBe('foo');

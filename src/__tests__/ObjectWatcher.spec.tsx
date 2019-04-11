@@ -37,9 +37,9 @@ describe('Tests with dummy children', () => {
     );
 
     const img = wrapper.find('img');
-    expect(img.length).toBe(1); 
+    expect(img.length).toBe(1);
     expect(mockChange.mock.calls.length).toBe(1);
-    expect(img.instance()).toBe(refObject.current); 
+    expect(img.instance()).toBe(refObject.current);
   });
 
   it('can watch object', () => {
@@ -55,10 +55,10 @@ describe('Tests with dummy children', () => {
     );
 
     let span = wrapper.find('span');
-    expect(span.length).toBe(1); 
-    expect(span.text()).toBe('2'); 
+    expect(span.length).toBe(1);
+    expect(span.text()).toBe('2');
     let pre = wrapper.find('pre');
-    expect(pre.length).toBe(1); 
+    expect(pre.length).toBe(1);
     expect(pre.text()).toBe('3');
 
     wrapper.simulate('click');
@@ -66,10 +66,10 @@ describe('Tests with dummy children', () => {
     expect(mockChange.mock.calls.length).toBe(2);
 
     span = wrapper.find('span');
-    expect(span.length).toBe(1); 
-    expect(span.text()).toBe('4'); 
+    expect(span.length).toBe(1);
+    expect(span.text()).toBe('4');
     pre = wrapper.find('pre');
-    expect(pre.length).toBe(1); 
+    expect(pre.length).toBe(1);
     expect(pre.text()).toBe('5');
   });
 });

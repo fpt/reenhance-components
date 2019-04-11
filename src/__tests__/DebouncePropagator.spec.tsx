@@ -24,8 +24,8 @@ describe('Tests with dummy children', () => {
     wrapper = wrapper.update();
 
     const span = wrapper.find('span');
-    expect(span.length).toBe(1); 
-    expect(span.text()).toBe('3'); 
+    expect(span.length).toBe(1);
+    expect(span.text()).toBe('3');
   });
 
   it('can pass new value after debounce time', async () => {
@@ -41,7 +41,7 @@ describe('Tests with dummy children', () => {
     wrapper = wrapper.update();
 
     const span = wrapper.find('span');
-    expect(span.length).toBe(1); 
-    expect(span.text()).toBe('4'); 
+    expect(span.length).toBe(1);
+    expect(span.text()).toBe('4');
   });
 });

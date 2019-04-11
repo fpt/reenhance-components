@@ -60,8 +60,8 @@ describe('Tests with dummy children', () => {
     wrapper = wrapper.update();
 
     const span = wrapper.find('span');
-    expect(span.length).toBe(1); 
-    expect(span.text()).toBe('3'); 
+    expect(span.length).toBe(1);
+    expect(span.text()).toBe('3');
   });
 
   it('can resolve subject and pass result to children', async () => {
@@ -77,8 +77,8 @@ describe('Tests with dummy children', () => {
     wrapper = wrapper.update();
 
     const span = wrapper.find('span');
-    expect(span.length).toBe(1); 
-    expect(span.text()).toBe('4'); 
+    expect(span.length).toBe(1);
+    expect(span.text()).toBe('4');
   });
 
   it('can pass parameter to subject', async () => {
@@ -94,15 +94,15 @@ describe('Tests with dummy children', () => {
     wrapper = wrapper.update();
 
     let span = wrapper.find('span');
-    expect(span.length).toBe(1); 
-    expect(span.text()).toBe('9'); 
+    expect(span.length).toBe(1);
+    expect(span.text()).toBe('9');
 
     wrapper.setProps({ add: 7 });
     await new Promise(resolve => setTimeout(resolve, 10));
     wrapper = wrapper.update();
 
     span = wrapper.find('span');
-    expect(span.length).toBe(1); 
-    expect(span.text()).toBe('11'); 
+    expect(span.length).toBe(1);
+    expect(span.text()).toBe('11');
   });
 });

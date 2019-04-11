@@ -6,7 +6,6 @@ import { Compose } from '../Compose';
 import { StateProvider, StateAndUpdater } from '../StateProvider';
 
 
-
 describe('Parameter tests', () => {
   it('Can compose single states (string)', () => {
     const StringState = StateProvider<string>('hi');
@@ -18,13 +17,12 @@ describe('Parameter tests', () => {
             {s.state}
           </div>
         )}
-      </Compose>
-    );
+      </Compose>);
 
     const div = wrapper.find('div');
-    expect(div.length).toBe(1); 
+    expect(div.length).toBe(1);
 
-    expect(div.text()).toBe('hi'); 
+    expect(div.text()).toBe('hi');
   });
 
   it('Can compose 2 states (boolean & number)', () => {
@@ -39,12 +37,11 @@ describe('Parameter tests', () => {
             {b.state.toString()}:{n.state}
           </div>
         )}
-      </Compose>
-    );
+      </Compose>);
 
     const div = wrapper.find('div');
-    expect(div.length).toBe(1); 
+    expect(div.length).toBe(1);
 
-    expect(div.text()).toBe('true:3'); 
+    expect(div.text()).toBe('true:3');
   });
 });
