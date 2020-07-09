@@ -240,3 +240,10 @@ This project aims these characteristics.
 * separation of view and logic
 * can coexist with other modules
 * works well with TypeScript
+
+### For myself
+
+```
+git push
+npm publish
+```
